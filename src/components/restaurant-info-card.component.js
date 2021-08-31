@@ -6,6 +6,7 @@ import {SvgXml} from "react-native-svg";
 
 import star from "../../assets/star";
 import open from "../../assets/open";
+import { Spacer } from "./spacer/spacer.component";
 
 const RestaurantCard = styled(Card)`
   background-color: ${(props) => props.theme.colors.bg.primary};
@@ -22,24 +23,24 @@ const Title = styled(Text)`
   color: ${(props) => props.theme.colors.ui.primary};
 `;
 
-const Rating = styled.View`
+const Rating = styled(View)`
   flex-direction: row;
   padding-top: ${(props) => props.theme.space[2]};
   padding-bottom: ${(props) => props.theme.space[2]};
 `;
 
-const Section = styled.View`
+const Section = styled(View)`
   flex-direction: row;
   align-items: center;
 `;
 
-const SectionEnd = styled.View`
+const SectionEnd = styled(View)`
   flex: 1;
   flex-direction: row;
   justify-content: flex-end;
 `;
 
-const Info = styled.View`
+const Info = styled(View)`
   padding: ${(props) => props.theme.space[3]};
 `;
 
@@ -70,8 +71,8 @@ export const RestaurantInfoCard = ({restaurant = {} }) => {
         <Title>{name}</Title>
         <Section>
           <Rating>
-            {ratingArray.map(() => (
-              <SvgXml xml={star} width={20} height={20} />
+            {ratingArray.map((index) => (
+              <SvgXml xml={star} width={20} height={20} key={index}/>
             ))}
           </Rating>
           <SectionEnd>
@@ -80,10 +81,12 @@ export const RestaurantInfoCard = ({restaurant = {} }) => {
                 TYMCZASOWO ZAMKNIĘTE
               </Text>
             )}
-            <View style={{ paddingLeft: 16 }} />
-            {isOpenNow && <SvgXml xml={open} width={20} height={20} />}
-            <View style={{ paddingLeft: 16 }} />
-            <Image style={{ width: 15, height: 15 }} source={{ uri: icon }} />
+            <Spacer position="left" size="large">
+              {isOpenNow && <SvgXml xml={open} width={20} height={20} />}
+            </Spacer>
+            <Spacer position="left" size="large">
+              <Image style={{ width: 15, height: 15 }} source={{ uri: icon }} />
+            </Spacer>
           </SectionEnd>
         </Section>
         <Address>{address}</Address>

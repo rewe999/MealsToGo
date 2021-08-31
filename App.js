@@ -1,5 +1,6 @@
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import React from "react";
+import { ScrollView } from 'react-native';
 import { ThemeProvider } from "styled-components";
 
 import {
@@ -27,10 +28,12 @@ export default function App() {
 
   return (
     <>
+    <ScrollView>
       <ThemeProvider theme={theme}>
         <RestaurantsScreen />
       </ThemeProvider>
       <ExpoStatusBar style="auto" />
+      </ScrollView>
     </>
   );
 }
