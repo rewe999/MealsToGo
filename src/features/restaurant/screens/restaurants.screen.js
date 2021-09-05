@@ -7,7 +7,6 @@ import { RestaurantInfoCard } from "../../../components/restaurant-info-card.com
 
 const SafeArea = styled(SafeAreaView)`
   flex: 1;
-  margin-top: ${StatusBar.currentHeight}px;
 `;
 
 const SearchContainer = styled.View`

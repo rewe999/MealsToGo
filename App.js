@@ -14,11 +14,31 @@ import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
 
 import { theme } from "./src/infrustructure/theme";
 import { RestaurantsScreen } from "./src/features/restaurant/screens/restaurants.screen";
+import { restaurantsRequest } from "./src/services/restaurants/restaurants.service"
 
 const Tab = createBottomTabNavigator();
 
+const TAB_ICON = {
+  Restaurants: "md-restaurant",
+  Map: "md-map",
+  Settings: "md-settings"
+}
+
 const Map = () => <Text>Settings</Text>
 const Settings = () => <Text>Settings</Text>
+
+const tabBarIcon = () => (
+  <Ionicons name={"iconName"} size={size} color={color} />
+)
+
+const createScreenOptions = ({ route }) => {
+  const iconName = TAB_ICON[route.name];
+  return {
+    tabBarIcon: ({ size, color }) => (
+      <Ionicons name={iconName} size={size} color={color} />
+    ),
+  };
+};
 
 export default function App() {
 
@@ -34,30 +54,12 @@ export default function App() {
     return null;
   }
 
-  const screenOptions = ({route}) => ({})
-
   return (
     <>
       <ThemeProvider theme={theme}>
         <NavigationContainer>
           <Tab.Navigator
-          screenOptions={({ route }) => ({
-            tabBarIcon: ({color, size }) => {
-              let iconName;
-  
-              if (route.name === 'Restaurants') {
-                iconName = "md-restaurant"
-              } else if (route.name === 'Settings') {
-                iconName = "md-settings"
-              } else if (route.name === 'Map') {
-                iconName = "md-map"
-              }
-  
-              return <Ionicons name={iconName} size={size} color={color} />;
-            },
-            tabBarActiveTintColor: 'tomato',
-            tabBarInactiveTintColor: 'gray',
-          })}>
+          screenOptions={createScreenOptions}>
             <Tab.Screen name="Restaurants" component={RestaurantsScreen}/>
             <Tab.Screen name="Map" component={Map} />
             <Tab.Screen name="Settings" component={Settings} />
